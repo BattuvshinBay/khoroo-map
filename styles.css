@@ -81,6 +81,7 @@ select {
   background: white;
   color: var(--text);
   font-size: 0.97rem;
+  appearance: none;
 }
 
 select:focus {

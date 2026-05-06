@@ -1,5 +1,6 @@
 const districtSelect = document.getElementById("district-select");
 const khorooSelect = document.getElementById("khoroo-select");
+const basemapSelect = document.getElementById("basemap-select");
 const visibleCount = document.getElementById("visible-count");
 const selectedName = document.getElementById("selected-name");
 const selectionDetails = document.getElementById("selection-details");
@@ -9,15 +10,27 @@ const map = L.map("map", {
   preferCanvas: true,
 }).setView([47.9184, 106.9177], 10);
 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+const streetLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-}).addTo(map);
+});
+
+const satelliteLayer = L.tileLayer(
+  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+  {
+    maxZoom: 19,
+    attribution:
+      "Tiles &copy; Esri, Maxar, Earthstar Geographics, and the GIS User Community",
+  },
+);
+
+streetLayer.addTo(map);
 
 let allKhoroos = [];
 let currentLayer = null;
 let selectedLayer = null;
 let districtColorMap = new Map();
+let activeBaseLayer = streetLayer;
 
 const selectedStyle = {
   color: "#d97706",
@@ -65,6 +78,18 @@ function setDetails(feature) {
     <p><strong>Дүүрэг:</strong> ${feature.district}</p>
     <p><strong>Хороо:</strong> ${feature.khoroo_number ?? "N/A"}</p>
   `;
+}
+
+function switchBasemap(mode) {
+  const nextLayer = mode === "satellite" ? satelliteLayer : streetLayer;
+
+  if (activeBaseLayer === nextLayer) {
+    return;
+  }
+
+  map.removeLayer(activeBaseLayer);
+  nextLayer.addTo(map);
+  activeBaseLayer = nextLayer;
 }
 
 function populateDistricts(data) {
@@ -191,6 +216,10 @@ function refreshView() {
 
 districtSelect.addEventListener("change", () => {
   refreshView();
+});
+
+basemapSelect.addEventListener("change", () => {
+  switchBasemap(basemapSelect.value);
 });
 
 khorooSelect.addEventListener("change", () => {
