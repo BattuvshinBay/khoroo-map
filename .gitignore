@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+
+# Deployment-only files
+docker-compose.yml
+Dockerfile
+nginx.conf
+DEPLOY.md
+
+# Local tooling noise
+.DS_Store
+Thumbs.db

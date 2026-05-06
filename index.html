@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ulaanbaatar Хороо</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  >
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="panel">
+      <p class="eyebrow">Tuvshin dev</p>
+      <h1>Хороо MAP</h1>
+      <p class="intro">
+        Repo дээрхи <code>khoroos.json</code> файлаар дүүргэлт хийсэн газрын зураг. Алдаатай зурагдсан хороо байгаа бол push request явуулна уу. Баярлалаа!
+      </p>
+
+      <div class="controls">
+        <label for="district-select">Дүүрэг</label>
+        <select id="district-select">
+          <option value="all">Бүх дүүрэг</option>
+        </select>
+
+        <label for="khoroo-select">Хороо</label>
+        <select id="khoroo-select" disabled>
+          <option value="">Хороо сонгоно уу</option>
+        </select>
+      </div>
+
+      <div class="summary">
+        <div class="summary-card">
+          <span class="summary-label">Харагдах хороо</span>
+          <strong id="visible-count">0</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Сонгосон</span>
+          <strong id="selected-name">Хоосон</strong>
+        </div>
+      </div>
+
+      <div id="selection-details" class="details">
+        <p>Хороо сонгоод газрын зураг дээр тодруулна уу.</p>
+      </div>
+    </aside>
+
+    <main class="map-shell">
+      <div id="map" aria-label="Khoroo map"></div>
+      <a
+        class="github-link"
+        href="https://github.com/BattuvshinBay/khoroo-map"
+        target="_blank"
+        rel="noreferrer"
+      >
+        github.com/BattuvshinBay/khoroo-map
+      </a>
+    </main>
+  </div>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script src="./app.js"></script>
+</body>
+</html>
