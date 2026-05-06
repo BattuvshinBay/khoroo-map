@@ -4,6 +4,10 @@ Interactive map for exploring Ulaanbaatar khoroo boundaries from `khoroos.json`.
 
 Live site: [khoroo.tuvshin.dev](https://khoroo.tuvshin.dev)
 
+## License
+
+Released under the `0BSD` license. Take what you need and use it however you need.
+
 ## Run locally
 
 This project is a static website, so you only need a small local web server.
